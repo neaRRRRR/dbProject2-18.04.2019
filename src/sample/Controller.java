@@ -77,11 +77,6 @@ public class Controller {
         }
 
 
-
-
-
-
-
     }
 
     public static void alertBox(String infoMessage,String headerText,String
@@ -94,17 +89,6 @@ public class Controller {
         alert.showAndWait();
     }
 
-    public void LoadDataFromDatabase(ActionEvent event){
-
-
-
-
-
-
-
-
-
-    }
 
 
 
