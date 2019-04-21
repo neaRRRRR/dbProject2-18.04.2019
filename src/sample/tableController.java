@@ -6,23 +6,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
-import java.security.spec.ECField;
 import java.sql.*;
 
-import javax.swing.text.TabableView;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 
@@ -64,6 +61,16 @@ public class tableController implements Initializable {
     public TextField docDel;
     public TextField staffDel;
     public TextField roomDel;
+    public TextField selPat;
+
+    public TextArea txtAr;
+
+
+
+
+    private AnchorPane content;
+
+    private AnchorPane menuPane;
 
 
     @FXML
@@ -127,6 +134,7 @@ public class tableController implements Initializable {
     private TableColumn<dataTable4,Integer> staaDid;
 
     ObservableList<dataTable4> oblist4 = FXCollections.observableArrayList();
+
 
 
 
@@ -420,7 +428,7 @@ public class tableController implements Initializable {
 
         String del1 = roomDel.getText();
 
-        String sql = "DELETE FROM staff WHERE roomID = '"+del1+"'";
+        String sql = "DELETE FROM room WHERE roomID = '"+del1+"'";
 
         try{
 
@@ -436,9 +444,355 @@ public class tableController implements Initializable {
 
     }
 
+    public void showDisp(ActionEvent avtr){
 
+        String sql = "SELECT * FROM outpatient";
+
+        try{
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()){
+
+                int pid = rs.getInt("pid");
+                String pname = rs.getString("pname");
+                String psurname = rs.getString("psurname");
+                String dsc = rs.getString("discharged");
+
+                txtAr.appendText("OLD patient ID:"+pid+"\n"+
+                "OLD Patient name:"+pname+"\n"+"OLD Patient surname:"+psurname+"\n"+"Discharged time:"+dsc+"\n"+"~~~~~~~~~~~~~~"+"\n");
+
+
+
+
+
+            }
+
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+
+
+    }
+
+    public void createRep(ActionEvent eac){
+
+
+
+
+        try {
+            Node node = (Node) eac.getSource();
+            dialogStage = (Stage) node.getScene().getWindow();
+
+            scene = new Scene(FXMLLoader.load(Main.class.getResource("reportInfo.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+
+        }
+        catch (Exception ev){
+            ev.printStackTrace();
+        }
+
+
+
+    }
+
+    public void totalBill(ActionEvent axz){
+
+        String sql = "SELECT * FROM totalbill";
+
+        try{
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()){
+
+                int pid = rs.getInt("PatientID");
+                int total = rs.getInt("total");
+
+                txtAr.appendText("Patient ID: "+pid+"\n"+"Cost: "+total+"$"+"\n"+"-----------------");
+
+
+
+
+
+            }
+
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+    }
+
+    public void genderOrd(ActionEvent azxz){
+
+        String sql = "Call genderClasf()";
+
+        txtAr.appendText("PATIENTS\n");
+        try{
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()){
+
+                int m = rs.getInt("males");
+                int f = rs.getInt("females");
+                int t = rs.getInt("total");
+
+                txtAr.appendText("Total male : "+m+"\n"+"Total female : "+f+"\n"+"Total Patient : "+t);
+
+
+
+
+
+            }
+
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+    }
+
+    public void getPat(ActionEvent azxc){
+
+
+        String id = selPat.getText();
+
+        String sql = "select decPat('"+id+"');";
+
+        try{
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()){
+
+               String d = rs.getString(1);
+                txtAr.appendText("Patient Status: "+d);
+
+
+
+
+
+            }
+
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+
+
+
+    }
+
+    public void staffPay(ActionEvent aqzd){
+
+
+
+        String sql = "call staffPayment();";
+
+        try{
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()){
+
+                String id = rs.getString(1);
+                String pay = rs.getString(2);
+
+                txtAr.appendText("Staff ID: "+id+"\n"+"Total Salary: "+pay+"\n"+"---------"+"\n");
+
+
+
+
+
+            }
+
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+
+
+
+
+    }
+
+    public void sortStaff(ActionEvent avzq){
+
+
+        String sql = "call staffPayment();";
+
+        try{
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()){
+
+                String id = rs.getString(1);
+                String pay = rs.getString(2);
+
+                int payi = Integer.parseInt(pay);
+                if(payi > 400){
+
+                    txtAr.appendText("High tier Staff\n");
+
+
+                }
+
+                else if(payi < 400 && payi > 200){
+
+                    txtAr.appendText("Medium tier Staff\n");
+
+                }
+
+                else{
+                    txtAr.appendText("Low tier Staff\n");
+                }
+
+                txtAr.appendText("Staff ID: "+id+"\n"+"Total Salary: "+pay+"\n"+"---------"+"\n");
+
+
+
+
+
+            }
+
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+
+
+
+    }
+
+    public void genDoc(ActionEvent azcbs){
+
+        String sql = "Call genderClassfD()";
+
+        try{
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            txtAr.appendText("DOCTORS\n");
+            while(rs.next()){
+
+
+                int m = rs.getInt("males");
+                int f = rs.getInt("females");
+                int t = rs.getInt("total");
+
+                txtAr.appendText("Total male : "+m+"\n"+"Total female : "+f+"\n"+"Total Doctors : "+t+"\n");
+
+
+
+
+
+            }
+
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+
+
+
+    }
+
+    public void staffGen(ActionEvent kmfds){
+
+        String sql = "Call genderClassfS()";
+
+        try{
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            txtAr.appendText("STAFFS\n");
+            while(rs.next()){
+
+                int m = rs.getInt("males");
+                int f = rs.getInt("females");
+                int t = rs.getInt("total");
+
+                txtAr.appendText("Total male : "+m+"\n"+"Total female : "+f+"\n"+"Total Staff : "+t+"\n");
+
+
+
+
+
+            }
+
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public void sortDocp(ActionEvent adfdf){
+
+        String sql = "call docPaym();";
+
+        try{
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            txtAr.appendText("DOCTOR'S SALARY\n");
+
+            while(rs.next()){
+
+                String id = rs.getString(1);
+                String pay = rs.getString(2);
+
+                txtAr.appendText("Doctor ID: "+id+"\n"+"Total Salary: "+pay+"\n"+"---------"+"\n");
+
+
+
+
+
+            }
+
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+
+
+
+
+
+    }
 
 
 
 
 }
+
+
+

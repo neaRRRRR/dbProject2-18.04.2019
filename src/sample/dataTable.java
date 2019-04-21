@@ -5,10 +5,10 @@ public class dataTable {
     int doctorID;
     String doctorName,doctorSurname,gender,tel,prof;
 
-    public dataTable(int doctorID, String doctorName, String dcctorSurname, String gender, String tel, String prof) {
+    public dataTable(int doctorID, String doctorName, String doctorSurname, String gender, String tel, String prof) {
         this.doctorID = doctorID;
         this.doctorName = doctorName;
-        this.doctorSurname = dcctorSurname;
+        this.doctorSurname = doctorSurname;
         this.gender = gender;
         this.tel = tel;
         this.prof = prof;

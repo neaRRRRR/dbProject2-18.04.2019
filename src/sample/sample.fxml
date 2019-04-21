@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -19,14 +21,26 @@
    <children>
       <AnchorPane prefHeight="353.0" prefWidth="449.0">
          <children>
-            <TextField fx:id="textUsr" layoutX="262.0" layoutY="89.0" />
-            <Button layoutX="314.0" layoutY="225.0" mnemonicParsing="false" onAction="#button" text="Login" />
+            <TextField fx:id="textUsr" layoutX="248.0" layoutY="118.0" />
+            <Button layoutX="301.0" layoutY="233.0" mnemonicParsing="false" onAction="#button" text="Login" />
             <Label fx:id="textLabel" layoutX="248.0" layoutY="298.0" text="Login page">
                <font>
                   <Font size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="textPw" layoutX="262.0" layoutY="158.0" />
+            <TextField fx:id="textPw" layoutX="249.0" layoutY="177.0" />
+            <Label layoutX="17.0" layoutY="22.0" text="HOSPITAL MANAGEMENT SYSTEM">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label layoutX="249.0" layoutY="101.0" text="Username" />
+            <Label layoutX="249.0" layoutY="160.0" text="Password" />
+            <ImageView fitHeight="184.0" fitWidth="224.0" layoutX="14.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/img/hospital.jpg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

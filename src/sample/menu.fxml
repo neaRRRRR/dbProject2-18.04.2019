@@ -7,8 +7,10 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="738.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.tableController">
   <tabs>
@@ -115,6 +117,33 @@
                </children>
             </AnchorPane>
          </content>
+      </Tab>
+      <Tab text="Display">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="14.0" layoutY="132.0" mnemonicParsing="false" onAction="#genderOrd" prefHeight="40.0" prefWidth="83.0" text="Sorted by (Gender)" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="11.0" />
+                     </font></Button>
+                  <Button layoutX="14.0" layoutY="82.0" mnemonicParsing="false" onAction="#totalBill" prefHeight="40.0" prefWidth="83.0" text="Total Bill" />
+                  <Button layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#createRep" prefHeight="50.0" prefWidth="83.0" text="Create Report" textAlignment="CENTER" wrapText="true" />
+                  <Button layoutX="14.0" layoutY="180.0" mnemonicParsing="false" onAction="#showDisp" prefHeight="62.0" prefWidth="83.0" text="Display Dispatched Patients" textAlignment="CENTER" wrapText="true" />
+                  <TextArea fx:id="txtAr" layoutX="321.0" layoutY="18.0" prefHeight="323.0" prefWidth="373.0" />
+                  <TextField fx:id="selPat" layoutX="14.0" layoutY="274.0" prefHeight="25.0" prefWidth="25.0" />
+                  <Button layoutX="41.0" layoutY="267.0" mnemonicParsing="false" onAction="#getPat" prefHeight="39.0" prefWidth="64.0" text="Select Patient" wrapText="true">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="105.0" layoutY="217.0" mnemonicParsing="false" onAction="#staffPay" text="Staff Payment" />
+                  <Button layoutX="106.0" layoutY="132.0" mnemonicParsing="false" onAction="#sortStaff" prefHeight="25.0" prefWidth="89.0" text="Sorted Staff" />
+                  <Button layoutX="106.0" layoutY="174.0" mnemonicParsing="false" onAction="#staffGen" prefHeight="25.0" prefWidth="89.0" text="Sorted Staff 2" />
+                  <Button layoutX="218.0" layoutY="217.0" mnemonicParsing="false" onAction="#genDoc" prefHeight="25.0" prefWidth="88.0" text="Sorted Doctors" />
+                  <Button layoutX="218.0" layoutY="174.0" mnemonicParsing="false" onAction="#sortDocp" prefHeight="25.0" prefWidth="88.0" text="Sorted Doctors 2" />
+               </children>
+            </AnchorPane>
+        </content>
       </Tab>
   </tabs>
 </TabPane>
